@@ -1,0 +1,230 @@
+/*
+ * @Author: Evan-lian
+ * @Date: 2018-07-11 09:32:11
+ * @LastEditors: Evan-lian
+ * @LastEditTime: 2018-07-11 17:31:02
+ * @Description: ESSP-WEB less 部分公共方法提取
+ */
+ @charset "utf-8";
+ /* 字体样式提取 */
+@essp_fy_song: "宋体";
+@essp_fz_10: 10px;
+@essp_fcolor_white:#fff;
+@essp_fcolor_black:#000;
+@essp_fcolor_gray:#ccc;
+@essp_fcolor_orange: #ff7210;
+@essp_fcolor_blue: #00a0e9;
+//常量
+@essp_blue: #3190e8;
+@essp_bc: #e4e4e4;
+@essp_fc:#fff;
+@essp_width_auto: 1200px;
+@essp_con_bg: #fff;
+@essp_font: 14px;
+
+//导航全局配置
+@essp_nav_color: #222;      // 字体颜色
+@essp_nav_bg: #00a0e9;      // 背景颜色
+@essp_nav_selcolor: #00a0e9;   // 导航选择样式
+
+//字体
+.essp_fz(@fz){
+	font-size: @fz;
+}
+.essp_bg(@bg:#fff){
+	background-color:@bg;
+}
+.essp_width_auto(@width:@essp_width_auto) {
+    width:@width;
+    margin:0 auto;
+}
+*, input, textarea, select, button{
+    font-family: "微软雅黑","Microsoft YaHei","Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB",Arial,sans-serif;
+}
+html,body {
+    min-width: @essp_width_auto;
+}
+ /* 浮动样式提取 */
+//清浮动
+.esspclearfix:after{
+    display: block;
+    clear: both;
+    content: "";
+    visibility: hidden;
+    height: 0;
+}
+.esspclearfix{
+    zoom:1;
+}
+
+//左浮动右浮动(默认左浮动)
+.esspfloat(@float:left){
+    float: @float;
+}
+// 背景图片地址和大小
+.esspbis(@url) {
+	background-image: url(@url);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.bgSize(@size:100%) {
+    -webkit-background-size: @size;
+    -moz-background-size: @size;
+    -o-background-size: @size;
+    -ms-background-size: @size;
+    background-size: @size;
+}
+
+///定位上下左右居中
+.esspctp(@width, @height) {
+	position: absolute;
+	top: 50%;
+    left: 50%;
+    margin-top: -@height/2;
+    margin-left: -@width/2;
+}
+// 设置padding值
+.padding(@pad:10px) {
+    padding: @pad;
+}
+.padding_l(@pad:10px) {
+    padding-left: @pad;
+}
+.padding_r(@pad:10px) {
+    padding-right: @pad;
+}
+.padding_t(@pad:10px) {
+    padding-top: @pad;
+}
+.padding_b(@pad:10px) {
+    padding-bottom: @pad;
+}
+
+//宽高
+.esspwh(@width, @height){
+	width: @width;
+	height: @height;
+}
+//字体大小、行高、字体
+.esspft(@size, @line-height,@color) {
+	font-size: @size;
+	line-height:@line-height;
+	color:@color;
+}
+//字体大小，颜色
+.esspsc(@size:@essp_font, @color:@essp_nav_bg){
+	font-size: @size;
+	color: @color;
+}
+
+//截断文本并显示省略号的混入类
+.esspellipsis() {
+    overflow:       hidden;
+    white-space:    nowrap;
+    text-overflow:  -o-ellipsis-lastline;
+    text-overflow:  ellipsis;
+}
+//显示两行，截断文本并显示省略号的混入类
+.esspellipsitwo() {
+    overflow:       hidden;
+    text-overflow:  -o-ellipsis-lastline;
+    text-overflow:  ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient: vertical;
+}
+//透明度混入类
+.esspopacity(@value:0) {
+	@ie6_value: (@value * 100);
+	-khtml-opacity:@value;
+	-moz-opacity: @value;
+	opacity: @value;
+	filter: ~'alpha(opacity=@{ie6_value})';
+}
+//强制缓行
+.esspword-wrap(){
+    white-space: pre;
+    white-space: pre-wrap;
+    white-space: pre-line;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -hp-pre-wrap;
+    word-wrap: break-word;
+}
+//用于设置单行文本垂直居中
+.esspline-height(@height:20px,@lineheight:20px){
+    height: @height;
+    line-height: @lineheight
+}
+
+//设置圆形
+.esspball(@width) {
+	width: @width;
+	padding-top: @width;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+}
+//设置三角形
+.esspsanjiao(top,@w:5px,@c:#f00){
+    border-width: @w;
+    border-color: transparent transparent @c transparent;
+    border-style: dashed dashed solid dashed;
+}
+.esspsanjiao(bottom,@w:5px,@c:#f00){
+    border-width: @w;
+    border-color: @c transparent transparent transparent;
+    border-style: solid dashed dashed dashed;
+}
+.esspsanjiao(left,@w:5px,@c:#f00){
+    border-width: @w;
+    border-color:  transparent @c transparent transparent;
+    border-style:  dashed solid dashed dashed;
+}
+.esspsanjiao(right,@w:5px,@c:#f00){
+    border-width: @w;
+    border-color: transparent transparent transparent @c;
+    border-style:  dashed dashed dashed solid;
+}
+.esspsanjiao(@_,@w:5px,@c:#f00){
+    width: 0px;
+    height: 0px;
+    overflow: hidden;
+}
+//圆角
+.esspborder-radius(@radius:5px){
+    -wekit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    -ms-border-radius: @radius;
+    -o-border-radius: @radius;
+    border-radius: @radius;
+}
+//边框
+.esspborder(@border-color:black;@border_width:1px;@bstyle:solid){
+    border: @border-color @border_width @bstyle;
+}
+//阴影
+.esspbox-shadow(){
+-moz-box-shadow:2px 2px 5px #e3e3e3;/*firefox*/
+-webkit-box-shadow:2px 2px 5px #e3e3e3;/*webkit*/
+box-shadow:2px 2px 5px #e3e3e3;/*opera或ie9*/
+}
+
+//-ele input控件placeholder修改
+.el-input__inner::-webkit-input-placeholder{
+    color:#ccc;
+}
+.el-input__inner::-moz-placeholder{   /* Mozilla Firefox 19+ */
+    color:#666;
+}
+.el-input__inner:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+    color:#666;
+}
+.el-input__inner:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+    color:#ccc;
+}
+
+
+
+
